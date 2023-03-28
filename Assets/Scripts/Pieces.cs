@@ -10,7 +10,7 @@ public enum PieceTypes
     Squeaky = 3,
     Frank = 4
 }
-public class Pieces : MonoBehaviour
+public class Pieces
 {
     private Vector3 position;
     private Vector2 gridPosition;

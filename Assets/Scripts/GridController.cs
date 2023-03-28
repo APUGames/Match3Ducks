@@ -1,78 +1,70 @@
 using System;
 using UnityEngine;
 
+
 public class GridController : MonoBehaviour
 {
-    // This script will manage the grid of pieces
-
     [SerializeField]
-    private GameObject piecePrefab;
+    private GameObject mallardDuck;
+    [SerializeField]
+    private GameObject blueyDuck;
+    [SerializeField]
+    private GameObject redDuck;
+    [SerializeField]
+    private GameObject squeakyDuck;
+    [SerializeField]
+    private GameObject frankDuck;
+
+
+
     [SerializeField]
     private Vector3 originPosition;
 
-    [Header("The Duckies")]
-
-    [SerializeField]
-    private GameObject Mallard;
-
-    [SerializeField]
-    private GameObject Bluey;
-
-    [SerializeField]
-    private GameObject Red;
-
-    [SerializeField]
-    private GameObject Squeaky;
-
-    [SerializeField]
-    private GameObject Frank
-        ;
-    public bool pressedDown;
-    public Vector2 pressedDownPosition;
-    public Vector2 pressedUpPosition;
-    public GameObject pressedDownGameObject;
-    public GameObject pressedUpGameObject;
-
-    private Vector2 startMovementPiecePosition;
-    private Vector2 endMovementPiecePosition;
-
-    private bool validMoveInProcess = false;
-
-    // Section for tuning
-
+    // This script will manage the grid of pieces
     private Pieces[,] grid = new Pieces[8, 8];
-
-    // [[0, 1, 2, 3, 4], [], [], []]
 
     // Start is called before the first frame update
     void Start()
     {
-        // Debug.Log(grid);
-
-        pressedDown = false;
-
-        System.Random rand = new System.Random();
-
         for (int row = 0; row < grid.GetLength(0); row++)
         {
             for (int column = 0; column < grid.GetLength(1); column++)
             {
-                // 4-0=4, 4-1=3, 4-2=2, 4-3=1, 4-4=0, 4-5=-1, 4-6=-2, 4-7=-3
                 Vector3 newWorldPosition = new Vector3(originPosition.x + row, originPosition.y, originPosition.z - column);
-                Pieces newPiece = new Pieces(newWorldPosition, new Vector2(row, column));
 
-                // Debug.Log(grid[row, column]);
+                grid[row, column] = new Pieces(newWorldPosition, new Vector2(row, column));
 
-                GameObject gameObject = Instantiate(piecePrefab, newPiece.GetPosition(), Quaternion.identity);
-                int theNumber = rand.Next(13, 101);
+                System.Random rand = new System.Random();
 
-                PieceController controller = gameObject.GetComponent<PieceController>();
-                controller.SetPiece(newPiece);
+                int randomNum = rand.Next(1, 75);
 
-                grid[row, column] = newPiece;
+                if (randomNum >= 1 && randomNum < 15)
+                {
+                    Instantiate(mallardDuck, grid[row, column].GetPosition(), Quaternion.identity);
+                }
+                else if (randomNum >= 15 && randomNum < 30)
+                {
+                    Instantiate(blueyDuck, grid[row, column].GetPosition(), Quaternion.identity);
+
+                }
+                else if (randomNum >= 30 && randomNum < 45)
+                {
+                    Instantiate(redDuck, grid[row, column].GetPosition(), Quaternion.identity);
+
+                }
+                else if (randomNum >= 45 && randomNum < 60)
+                {
+                    Instantiate(squeakyDuck, grid[row, column].GetPosition(), Quaternion.identity);
+
+                }
+                else if (randomNum >= 60 && randomNum < 75)
+                {
+                    Instantiate(frankDuck, grid[row, column].GetPosition(), Quaternion.identity);
+
+                }
             }
+
         }
+
     }
-
-
 }
