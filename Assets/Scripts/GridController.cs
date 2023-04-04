@@ -67,4 +67,9 @@ public class GridController : MonoBehaviour
         }
 
     }
+
+    void Update()
+    {
+        
+    }
 }
